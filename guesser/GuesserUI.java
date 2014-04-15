@@ -1,11 +1,7 @@
-package ru.ifmo.enf.kogan.sandbox.guesser;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 
 /**
  * Created by arsenykogan on 14/04/14.
@@ -28,7 +24,7 @@ public class GuesserUI extends JFrame {
 
     class Surface extends JPanel {
 
-        private void doDrawing(Graphics2D graphics2D) {
+        private void doDrawing(final Graphics2D graphics2D) {
             graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics2D.setColor(new Color(41, 176, 200));
             graphics2D.fillRoundRect(0, 0, 50, 50, 50, 50);

@@ -1,5 +1,3 @@
-package ru.ifmo.enf.kogan.sandbox.parser;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

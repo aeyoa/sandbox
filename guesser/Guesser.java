@@ -1,5 +1,3 @@
-package ru.ifmo.enf.kogan.sandbox.guesser;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

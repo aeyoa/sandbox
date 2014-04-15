@@ -1,5 +1,3 @@
-package ru.ifmo.enf.kogan.sandbox.guesser;
-
 import javax.swing.*;
 
 /**
