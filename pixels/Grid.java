@@ -13,25 +13,26 @@ public class Grid extends PApplet {
     int gridSize = pdfSize / count;
     boolean pixelsAdded = false;
     PImage img;
+    List<PixelSort.PixelHue> sortedPixels;
 
 
     public void setup() {
-        img = loadImage("kroll.jpg");
-        final List<PixelSort.PixelHue> sortedPixels = new PixelSort(this).sort(img);
+        img = loadImage("resources/pearl.jpg");
+        sortedPixels = new PixelSort(this).sort(img);
         img.loadPixels();
         int pixelIndex = 0;
         for (PixelSort.PixelHue sortedPixel : sortedPixels) {
             img.pixels[pixelIndex++] = sortedPixel.getColor();
         }
         img.updatePixels();
-        size(pdfSize, pdfSize, PDF, "pixels/output.pdf");
+        size(pdfSize, pdfSize, PDF, "pixels/resources/output-pearl.pdf");
     }
 
     public void draw() {
         background(255);
         addPixels();
         addGrid();
-//        addNumbers();
+        addNumbers();
         exit();
     }
 
@@ -54,7 +55,8 @@ public class Grid extends PApplet {
         int number = 1;
         for (int i = 0; i < count; i++) {
             for (int j = 0; j < count; j++) {
-                String numberString = nf(number, 3);
+//                String numberString = nf(number, 3);
+                String numberString = nf(sortedPixels.get(i * count + j).getIndex(), 3);
                 int x = i * gridSize + gridSize / 2;
                 int y = j * gridSize + gridSize / 2;
                 if (pixelsAdded) {
@@ -67,7 +69,7 @@ public class Grid extends PApplet {
 
                 if (number == 256) {
                     textSize(5);
-                    text("Help Mario\nto save Princess", y, x);
+                    text("Iconic", y, x);
                 } else {
                     text(numberString, y, x);
                 }

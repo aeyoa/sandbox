@@ -1,9 +1,9 @@
-import org.omg.PortableServer.IMPLICIT_ACTIVATION_POLICY_ID;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -20,18 +20,38 @@ public class PixelSort {
     public List<PixelHue> sort(final PImage image) {
         image.loadPixels();
         final List<PixelHue> pixels = new ArrayList<>();
-        int index = 0;
+        int index = 1;
         for (int pixel : image.pixels) {
             pixels.add(new PixelHue(pixel, index++));
         }
         Collections.sort(pixels);
+
+        final int rowLength = (int) Math.sqrt(pixels.size());
+        for (int i = 0; i < rowLength; i++) {
+            Collections.sort(pixels.subList(rowLength * i, rowLength * i + rowLength), new Comparator<PixelHue>() {
+                @Override
+                public int compare(final PixelHue o1, final PixelHue o2) {
+                    if (getColorFactor(o1.getColor()) > getColorFactor(o2.getColor())) {
+                        return 1;
+                    }
+                    if (getColorFactor(o1.getColor()) == getColorFactor(o2.getColor())) {
+                        return 0;
+                    }
+                    return -1;
+                }
+
+                private float getColorFactor(final int color) {
+                    return applet.hue(color);
+                }
+            });
+        }
         return pixels;
     }
 
     public class PixelHue implements Comparable<PixelHue> {
 
-        final int color;
-        final int index;
+        private final int color;
+        private final int index;
 
         public PixelHue(final int color, final int index) {
             this.color = color;
@@ -60,6 +80,7 @@ public class PixelSort {
 
         private float getColorFactor(final int color) {
             return 1 - applet.brightness(color);
+//            return applet.hue(color);
         }
     }
 }
