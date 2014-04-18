@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.util.List;
+
 /**
  * Created by arsenykogan on 15/04/14.
  */
@@ -15,14 +17,21 @@ public class Grid extends PApplet {
 
     public void setup() {
         img = loadImage("kroll.jpg");
+        final List<PixelSort.PixelHue> sortedPixels = new PixelSort(this).sort(img);
+        img.loadPixels();
+        int pixelIndex = 0;
+        for (PixelSort.PixelHue sortedPixel : sortedPixels) {
+            img.pixels[pixelIndex++] = sortedPixel.getColor();
+        }
+        img.updatePixels();
         size(pdfSize, pdfSize, PDF, "pixels/output.pdf");
     }
 
     public void draw() {
         background(255);
-        //  addPixels();
+        addPixels();
         addGrid();
-        addNumbers();
+//        addNumbers();
         exit();
     }
 
