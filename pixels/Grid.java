@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,24 +9,28 @@ import java.util.List;
  */
 public class Grid extends PApplet {
 
-    int pdfSize = 1600;
-    int count = 16;
-    int gridSize = pdfSize / count;
-    boolean pixelsAdded = false;
-    PImage img;
-    List<PixelSort.PixelHue> sortedPixels;
+    private int count;
+    private int gridSize = 100; // Cell size is always 100px
+    private int pdfSize;
+    private boolean pixelsAdded = false;
+    private PImage img;
+    private List<PixelSort.PixelHue> sortedPixels;
 
 
     public void setup() {
-        img = loadImage("resources/pearl.jpg");
-        sortedPixels = new PixelSort(this).sort(img);
-        img.loadPixels();
-        int pixelIndex = 0;
-        for (PixelSort.PixelHue sortedPixel : sortedPixels) {
-            img.pixels[pixelIndex++] = sortedPixel.getColor();
-        }
-        img.updatePixels();
-        size(pdfSize, pdfSize, PDF, "pixels/resources/output-pearl.pdf");
+
+        // Load image
+        img = loadImage("resources/me.jpg");
+        // Get width from this image to set up the cells count
+        count = img.width;
+        // Calculate pdf size
+        pdfSize = count * gridSize;
+
+        // Sort pixels here
+        sortPixels(true);
+
+        // Output PDF file
+        size(pdfSize, pdfSize, PDF, "pixels/resources/output-me.pdf");
     }
 
     public void draw() {
@@ -36,7 +41,8 @@ public class Grid extends PApplet {
         exit();
     }
 
-    void addGrid() {
+    /* Paints a grid on the image */
+    private void addGrid() {
         stroke(0);
         strokeWeight(0.5f);
         int xy = 0;
@@ -47,7 +53,26 @@ public class Grid extends PApplet {
         }
     }
 
-    void addNumbers() {
+    /* Paints a colored cells from.
+    * Gets colors from sorted array of pixels. */
+    private void addPixels() {
+        pixelsAdded = true;
+        noStroke();
+        int number = 0;
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < count; j++) {
+                int x = i * gridSize;
+                int y = j * gridSize;
+                fill(img.pixels[number]);
+                rect(y, x, gridSize, gridSize);
+                number++;
+            }
+        }
+    }
+
+    /* Adds number to each cell
+    * that correspond the index in the sorted array of pixels. */
+    private void addNumbers() {
         textFont(createFont("Courier New", 10));
         textAlign(CENTER, CENTER);
         fill(0);
@@ -78,20 +103,23 @@ public class Grid extends PApplet {
         }
     }
 
-    void addPixels() {
-        pixelsAdded = true;
-        noStroke();
-        int number = 0;
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < count; j++) {
-                String numberString = nf(number, 3);
-                int x = i * gridSize;
-                int y = j * gridSize;
-                fill(img.pixels[number]);
-                rect(y, x, gridSize, gridSize);
-                number++;
+    /* Sort pixels of the image */
+    private void sortPixels(final boolean doSort) {
+            sortedPixels = new PixelSort(this).sort(img);
+            if (doSort) {
+                img.loadPixels();
+                int pixelIndex = 0;
+                for (PixelSort.PixelHue sortedPixel : sortedPixels) {
+                    img.pixels[pixelIndex++] = sortedPixel.getColor();
+                }
+                img.updatePixels();
+            } else {
+                int unsortedImagePixelIndex = 1;
+                for (PixelSort.PixelHue sortedPixel : sortedPixels) {
+                    sortedPixel.setIndex(unsortedImagePixelIndex++);
+                }
             }
-        }
+
     }
 
 

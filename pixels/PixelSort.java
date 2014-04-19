@@ -51,7 +51,7 @@ public class PixelSort {
     public class PixelHue implements Comparable<PixelHue> {
 
         private final int color;
-        private final int index;
+        private int index;
 
         public PixelHue(final int color, final int index) {
             this.color = color;
@@ -64,6 +64,10 @@ public class PixelSort {
 
         public int getIndex() {
             return index;
+        }
+
+        public void setIndex(final int index) {
+            this.index = index;
         }
 
         @Override
