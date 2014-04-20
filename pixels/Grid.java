@@ -1,7 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +14,6 @@ public class Grid extends PApplet {
     private boolean pixelsAdded = false;
     private PImage img;
     private List<PixelSort.PixelHue> sortedPixels;
-
 
     public void setup() {
 
@@ -105,20 +103,20 @@ public class Grid extends PApplet {
 
     /* Sort pixels of the image */
     private void sortPixels(final boolean doSort) {
-            sortedPixels = new PixelSort(this).sort(img);
-            if (doSort) {
-                img.loadPixels();
-                int pixelIndex = 0;
-                for (PixelSort.PixelHue sortedPixel : sortedPixels) {
-                    img.pixels[pixelIndex++] = sortedPixel.getColor();
-                }
-                img.updatePixels();
-            } else {
-                int unsortedImagePixelIndex = 1;
-                for (PixelSort.PixelHue sortedPixel : sortedPixels) {
-                    sortedPixel.setIndex(unsortedImagePixelIndex++);
-                }
+        sortedPixels = new PixelSort(this).sort(img);
+        if (doSort) {
+            img.loadPixels();
+            int pixelIndex = 0;
+            for (PixelSort.PixelHue sortedPixel : sortedPixels) {
+                img.pixels[pixelIndex++] = sortedPixel.getColor();
             }
+            img.updatePixels();
+        } else {
+            int unsortedImagePixelIndex = 1;
+            for (PixelSort.PixelHue sortedPixel : sortedPixels) {
+                sortedPixel.setIndex(unsortedImagePixelIndex++);
+            }
+        }
 
     }
 
