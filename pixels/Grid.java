@@ -16,25 +16,49 @@ public class Grid extends PApplet {
     private List<PixelSort.PixelHue> sortedPixels;
 
     public void setup() {
-
         // Load image
-        img = loadImage("resources/me.jpg");
+        img = loadImage("resources/venus.jpg");
         // Get width from this image to set up the cells count
         count = img.width;
         // Calculate pdf size
         pdfSize = count * gridSize;
 
-        // Sort pixels here
-        sortPixels(true);
-
-        // Output PDF file
-        size(pdfSize, pdfSize, PDF, "pixels/resources/output-me.pdf");
+        final String pdfName = "venus";
+        /* Only one method on one run. */
+//        drawEmptyGrid(pdfName);
+        drawPixelGrid(pdfName);
+//        drawTextPixelGrid(pdfName);
     }
 
     public void draw() {
+    }
+
+    public void drawEmptyGrid(final String name) {
         background(255);
-        addPixels();
+        // Output PDF file
+        size(pdfSize, pdfSize, PDF, "pixels/resources/" + name + "-grid.pdf");
+        sortPixels(false);
         addGrid();
+        addNumbers();
+        exit();
+    }
+
+    public void drawPixelGrid(final String name) {
+        // Output PDF file
+        size(pdfSize, pdfSize, PDF, "pixels/resources/" + name + "-pixels.pdf");
+        sortPixels(true);
+        addGrid();
+        addPixels();
+        addNumbers();
+        exit();
+    }
+
+    public void drawTextPixelGrid(final String name) {
+        // Output PDF file
+        size(pdfSize, pdfSize, PDF, "pixels/resources/" + name + "-test.pdf");
+        sortPixels(false);
+        addGrid();
+        addPixels();
         addNumbers();
         exit();
     }
