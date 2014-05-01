@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 
+import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,18 +15,20 @@ public class PuppyMath extends PApplet {
 
 
     public void setup() {
-        size(size, size, PDF, "puppy-math/resources/prizes-1.pdf");
-        background(255);
+        size(size, size, PDF, "puppy-math/resources/prizes-3.pdf");
+        background(new Color(255, 255, 235).getRGB());
         addGrid();
-        addPrizes("Тапочки");
+//        addPrizes("Тапочки");
+//        addPrizes("Лавровое \nдерево");
+        addPrizes("Поездка \nв Прагу и Вену");
 
         exit();
     }
 
 
     private void addGrid() {
-        stroke(0);
-        strokeWeight(3f);
+        stroke(50);
+        strokeWeight(1f);
         int xy = 0;
         while (xy <= size) {
             line(xy, 0, xy, size);
@@ -35,7 +38,7 @@ public class PuppyMath extends PApplet {
     }
 
     private void addPrizes(final String magicPresent) {
-        textFont(createFont("BebasNeueRegular", 40));
+        textFont(createFont("BebasNeue-Thin", 50));
         textAlign(CENTER, CENTER);
         fill(0);
 
@@ -56,13 +59,15 @@ public class PuppyMath extends PApplet {
                 } else {
                     text = allNumbers.next().toString();
                 }
-                int shift = 50;
-                fill(68, 240, 255);
+                int shift = 60;
+                fill(new Color(255, 190, 41).getRGB());
                 noStroke();
                 rectMode(CENTER);
-                rect(y, x - shift, 70, 70);
+                rect(y, x - shift, 80, 80, 25);
                 fill(0);
+//                textFont(createFont("BebasNeueRegular", 50));
                 text(presents.get(index++), y, x + shift);
+//                textFont(createFont("BebasNeueRegular", 50));
                 text(text, y, x - shift);
             }
         }

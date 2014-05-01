@@ -8,7 +8,7 @@ public class PresentSupply {
     private final int numberOfCells = 100;
     private List<String> real = Arrays.asList(
             "Тапочки",
-            "Лавровое дерево",
+            "Лавровое \nдерево",
             "Поездка \nв Прагу и Вену");
     private List<String> fake = Arrays.asList(
             "Клетчатая \nрубашка",
@@ -18,10 +18,16 @@ public class PresentSupply {
             "Купание \nс дельфинами",
             "iPhone 5S",
             "Встреча с Геной \nШушкевичем",
-            "Часы \nLondon",
+            "Коньки",
             "Абонемент \nв спортзал",
             "Кругосветное \nпутешествие",
-            "Поход \nв ресторан");
+            "Скутер",
+            "Поездка \nв Лондон",
+            "Надувная \nлодка",
+            "Спутниковая \nтарелка",
+            "Швейцарские \nчасы",
+            "Прогулка \nна вертолете",
+            "Посудомоечная \nмашина");
 
     private Random random = new Random(10);
 
