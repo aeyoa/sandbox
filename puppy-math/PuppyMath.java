@@ -15,12 +15,13 @@ public class PuppyMath extends PApplet {
 
 
     public void setup() {
-        size(size, size, PDF, "puppy-math/resources/prizes-3.pdf");
+        size(size, size, PDF, "puppy-math/resources/prizes-4.pdf");
         background(new Color(255, 255, 235).getRGB());
         addGrid();
 //        addPrizes("Тапочки");
 //        addPrizes("Лавровое \nдерево");
-        addPrizes("Поездка \nв Прагу и Вену");
+//        addPrizes("Поездка \nв Прагу и Вену");
+        addPrizes("Путеводители");
 
         exit();
     }

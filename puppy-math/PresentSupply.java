@@ -7,7 +7,7 @@ public class PresentSupply {
 
     private final int numberOfCells = 100;
     private List<String> real = Arrays.asList(
-            "Тапочки",
+            "Путеводители",
             "Лавровое \nдерево",
             "Поездка \nв Прагу и Вену");
     private List<String> fake = Arrays.asList(
