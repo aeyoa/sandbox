@@ -17,17 +17,17 @@ public class Grid extends PApplet {
 
     public void setup() {
         // Load image
-        img = loadImage("resources/venus.jpg");
+        img = loadImage("resources/nad.jpg");
         // Get width from this image to set up the cells count
         count = img.width;
         // Calculate pdf size
         pdfSize = count * gridSize;
 
-        final String pdfName = "venus";
+        final String pdfName = "nad";
         /* Only one method on one run. */
 //        drawEmptyGrid(pdfName);
-        drawPixelGrid(pdfName);
-//        drawTextPixelGrid(pdfName);
+//        drawPixelGrid(pdfName);
+        drawTextPixelGrid(pdfName);
     }
 
     public void draw() {
