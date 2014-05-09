@@ -20,12 +20,12 @@ public class Dots extends PApplet {
         background(255);
 
         // Output PDF file
-        size(pdfWidth, pdfHeight, PDF, "happy-dots/resources/circles.pdf");
+        size(pdfWidth, pdfHeight, PDF, "happy-dots/resources/dots.pdf");
 
         // Draw dots
-//        drawDots();
-        drawNumbers(150);
-        drawCircles();
+        drawDots();
+//        drawNumbers(150);
+//        drawCircles();
 
         exit();
     }
