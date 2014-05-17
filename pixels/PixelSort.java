@@ -26,8 +26,8 @@ public class PixelSort {
         }
         Collections.sort(pixels);
 
-        final int rowLength = (int) Math.sqrt(pixels.size());
-        for (int i = 0; i < rowLength; i++) {
+        final int rowLength = image.width;
+        for (int i = 0; i < image.height; i++) {
             Collections.sort(pixels.subList(rowLength * i, rowLength * i + rowLength), new Comparator<PixelHue>() {
                 @Override
                 public int compare(final PixelHue o1, final PixelHue o2) {
