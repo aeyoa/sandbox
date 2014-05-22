@@ -17,20 +17,17 @@ public class Grid extends PApplet {
 
     public void setup() {
         // Load image
-        img = loadImage("resources/nad-20.jpg");
+        img = loadImage("resources/nad.jpg");
         // Get width from this image to set up the cells count
         count = img.width;
         // Calculate pdf size
         pdfSize = count * gridSize;
 
-        final String pdfName = "nad-20";
+        final String pdfName = "nad";
         /* Only one method on one run. */
 //        drawEmptyGrid(pdfName);
 //        drawPixelGrid(pdfName);
         drawTextPixelGrid(pdfName);
-    }
-
-    public void draw() {
     }
 
     public void drawEmptyGrid(final String name) {
@@ -114,10 +111,12 @@ public class Grid extends PApplet {
                     }
                 }
 
-                if (number == 256) {
-                    textSize(5);
-                    text("Iconic", y, x);
+                if (sortedPixels.get(i * count + j).getIndex() == 256) {
+                    System.out.println(i + " " + j);
+                    textSize(8);
+                    text("Forever", y, x);
                 } else {
+                    textSize(10);
                     text(numberString, y, x);
                 }
                 number++;
