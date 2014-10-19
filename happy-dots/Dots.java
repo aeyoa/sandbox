@@ -9,18 +9,19 @@ public class Dots extends PApplet {
     private int pdfWidth;
     private int pdfHeight;
     private int scale = 100; // Also a cell size
-    private int[] threshold = new int[]{230, 150, 70};
+    private int[] threshold = new int[]{230, 200, 180, 150, 120, 90, 70, 30};
+    int radiusScale = 8;
     private PImage img;
 
     public void setup() {
         // Load image
-        img = loadImage("resources/dots-2.jpg");
+        img = loadImage("resources/dir.jpg");
         pdfHeight = img.height * scale;
         pdfWidth = img.width * scale;
         background(255);
 
         // Output PDF file
-        size(pdfWidth, pdfHeight, PDF, "happy-dots/resources/dots.pdf");
+        size(pdfWidth, pdfHeight, PDF, "happy-dots/resources/dir.pdf");
 
         // Draw dots
         drawDots();
@@ -36,7 +37,10 @@ public class Dots extends PApplet {
         ellipseMode(CENTER);
         fill(0);
         noStroke();
-
+//
+//        noFill();
+//        strokeWeight(1);
+//        stroke(0);
 
         img.loadPixels();
         int index = 0;
@@ -47,7 +51,6 @@ public class Dots extends PApplet {
                 System.out.println(index + " : " + radius);
                 count++;
             }
-            int radiusScale = 30;
             ellipse((index % img.width) * scale + scale / 2,
                     (index / img.width) * scale + scale / 2,
                     radius * radiusScale, radius * radiusScale);
@@ -67,7 +70,6 @@ public class Dots extends PApplet {
         int index = 0;
         for (int pixel : img.pixels) {
             for (int i = 1; i < 4; i++) {
-                int radiusScale = 30;
                 ellipse((index % img.width) * scale + scale / 2,
                         (index / img.width) * scale + scale / 2,
                         i * radiusScale, i * radiusScale);
